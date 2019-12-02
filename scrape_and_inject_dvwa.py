@@ -131,10 +131,10 @@ async def sql_injection_vulnerability_checker(
             ) as response:
                 soup = bs4.BeautifulSoup(await response.read(), "html.parser")
                 vulnerability_data["db_user"] = soup.find(
-                    string=re.compile("First name: (?!admin)")
+                    string=re.compile("^First name: (?!admin)")
                 )[12:]
                 vulnerability_data["db_version"] = soup.find(
-                    string=re.compile("Surname: (?!admin)")
+                    string=re.compile("^Surname: (?!admin)")
                 )[9:]
 
     return VulnerabilityResult(
