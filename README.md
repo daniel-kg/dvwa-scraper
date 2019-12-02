@@ -3,6 +3,7 @@
 You will need to install pipenv! https://github.com/pypa/pipenv
 
 Then go to this repos directory on your machine and run:
+
     $ pipenv install
 
 # Running
