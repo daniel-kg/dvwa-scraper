@@ -142,7 +142,7 @@ async def sql_injection_vulnerability_checker(
     )
 
 
-async def scrape_page(
+async def scrape_and_check_page_for_vulnerability(
     session: ClientSession, vulnerability_checker, scrape_target: ScrapeTarget
 ) -> ScrapedPage:
     soup = bs4.BeautifulSoup(
@@ -227,7 +227,7 @@ async def scrape_dvwa(
             while len(pending) < concurrency and len(scrape_targets) > 0:
                 scrape_target = scrape_targets.pop()
                 targets_being_scraped.append(scrape_target)
-                pending.add(scrape_page(session, vulnerability_checker, scrape_target))
+                pending.add(scrape_and_check_page_for_vulnerability(session, vulnerability_checker, scrape_target))
 
             done, pending = await asyncio.wait(
                 pending, return_when=asyncio.FIRST_COMPLETED
